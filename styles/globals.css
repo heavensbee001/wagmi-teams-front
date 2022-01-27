@@ -2,6 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
+@import url('https://fonts.googleapis.com/css?family=Baskervville');
+
 html,
 body {
 	padding: 0;
@@ -18,6 +20,7 @@ a {
 	box-sizing: border-box;
 }
 
+/* font configuration */
 @font-face {
 	font-family: basement-grotesque;
 	src: url('/BasementGrotesque-Black_v1.202.otf') format('opentype');
@@ -25,4 +28,7 @@ a {
 
 .bg-font {
 	font-family: 'basement-grotesque';
+}
+.bv-font {
+	font-family: 'Baskervville';
 }
