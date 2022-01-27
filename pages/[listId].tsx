@@ -6,12 +6,9 @@ export default function Jobs({ id }) {
 	const router = useRouter()
 
 	return (
-		<Layout page={id}>
-			<Head>
-				<title>{siteTitle}</title>
-			</Head>
+		<Layout page={siteTitle}>
 			<section>
-				<p>{id}</p>
+				<h2 className="text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
 			</section>
 		</Layout>
 	)

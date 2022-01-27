@@ -8,8 +8,8 @@ export default function Home() {
 			<Head>
 				<title>{siteTitle}</title>
 			</Head>
-			<div className="px-2">
-				<section className="mt-32 mb-32">
+			<div>
+				<section className="mt-24 mb-32">
 					<h2 className="bg-font text-5xl leading-snug tracking-wider">
 						TEAM UP
 						<br />

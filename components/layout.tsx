@@ -18,6 +18,7 @@ export default function Layout({ children, home, page }: { children: React.React
 					<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap" rel="stylesheet" />
 				</Head>
 
+				<div className="pt-12"></div>
 				<header className="absolute w-full left-0 top-0 overflow-hidden">
 					<Link href="/" passHref>
 						<div className="-mt-1.5 relative p-6 hover:cursor-pointer">
@@ -30,23 +31,23 @@ export default function Layout({ children, home, page }: { children: React.React
 						</div>
 					</Link>
 					{page === 'hackathons' && (
-						<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90">
-							<p>
-								<Link href="/jobs">jobs</Link>
-							</p>
-						</div>
+						<Link href="/jobs">
+							<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer">
+								<p>jobs</p>
+							</div>
+						</Link>
 					)}
 
 					{page === 'jobs' && (
-						<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90">
-							<p>
-								<Link href="/hackathons">hackathons</Link>
-							</p>
-						</div>
+						<Link href="/hackathons" passHref>
+							<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer">
+								<p>hackathons</p>
+							</div>
+						</Link>
 					)}
 				</header>
 
-				<main>{children}</main>
+				<main className="px-2 py-4">{children}</main>
 			</div>
 			<footer className="absolute bottom-0 w-full bg-black text-white bv-font text-center">
 				<p>
