@@ -2,16 +2,16 @@ import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import { useRouter } from 'next/router'
 
-export default function Jobs() {
+export default function Jobs({ id }) {
 	const router = useRouter()
 
 	return (
-		<Layout>
+		<Layout page={id}>
 			<Head>
 				<title>{siteTitle}</title>
 			</Head>
 			<section>
-				<p>Dynamic page</p>
+				<p>{id}</p>
 			</section>
 		</Layout>
 	)
@@ -24,6 +24,6 @@ export async function getStaticPaths() {
 	}
 }
 
-export async function getStaticProps() {
-	return { props: {} }
+export async function getStaticProps({ params }) {
+	return { props: { id: params.listId } }
 }

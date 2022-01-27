@@ -5,7 +5,7 @@ import styles from './layout.module.css'
 const name = '[Your Name]'
 export const siteTitle = 'wagmi teams'
 
-export default function Layout({ children, home }: { children: React.ReactNode; home?: boolean }) {
+export default function Layout({ children, home, page }: { children: React.ReactNode; home?: boolean; page?: string }) {
 	return (
 		<section className="w-screen bg-orange min-h-screen flex justify-center">
 			<div className="w-full max-w-screen-md">
@@ -29,13 +29,18 @@ export default function Layout({ children, home }: { children: React.ReactNode; 
 							</p>
 						</div>
 					</Link>
-					{home ? null : (
-						<div>
+					{page === 'hackathons' && (
+						<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90">
 							<p>
-								<Link href="/hackathons">HACKATHONS</Link>
+								<Link href="/jobs">jobs</Link>
 							</p>
+						</div>
+					)}
+
+					{page === 'jobs' && (
+						<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90">
 							<p>
-								<Link href="/jobs">JOBS</Link>
+								<Link href="/hackathons">hackathons</Link>
 							</p>
 						</div>
 					)}
