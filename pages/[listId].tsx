@@ -1,8 +1,6 @@
 import Head from 'next/head'
 import Layout, { siteTitle } from '../components/layout'
 import { useRouter } from 'next/router'
-import { allowedNodeEnvironmentFlags } from 'process'
-import { syncBuiltinESMExports } from 'module'
 
 export default function Jobs() {
 	const router = useRouter()
