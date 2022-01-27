@@ -8,34 +8,35 @@ export default function Home() {
 			<Head>
 				<title>{siteTitle}</title>
 			</Head>
-
-			<section>
-				<h2 className="bg-font text-5xl leading-snug tracking-wider">
-					TEAM UP
-					<br />
-					WITH AMAZING
-					<br />
-					PEOPLE
-				</h2>
-			</section>
-			<section className="bv-font text-3xl text-white">
-				<p>
-					<Link href="/hackathons" passHref>
-						<div className="group">
-							<span className="group-hover:underline group-hover:italic group-hover:cursor-pointer">hackathons</span>
-							<span className="pl-6 group-hover:cursor-pointer group-hover:pl-8">→</span>
-						</div>
-					</Link>
-				</p>
-				<p>
-					<Link href="/jobs" passHref>
-						<div className="group">
-							<span className="group-hover:underline group-hover:italic group-hover:cursor-pointer">jobs</span>
-							<span className="pl-6 hover:cursor-pointer group-hover:pl-8">→</span>
-						</div>
-					</Link>
-				</p>
-			</section>
+			<div className="px-2">
+				<section className="mt-32 mb-32">
+					<h2 className="bg-font text-5xl leading-snug tracking-wider">
+						TEAM UP
+						<br />
+						WITH AMAZING
+						<br />
+						PEOPLE
+					</h2>
+				</section>
+				<section className="bv-font text-4xl text-white">
+					<p>
+						<Link href="/hackathons" passHref>
+							<div className="group mb-4 tracking-wide font-extralight">
+								<span className="group-hover:tracking-widest group-hover:underline group-hover:italic group-hover:cursor-pointer">hackathons</span>
+								<span className="text-3xl pl-8 group-hover:cursor-pointer group-hover:pl-10">⟶</span>
+							</div>
+						</Link>
+					</p>
+					<p>
+						<Link href="/jobs" passHref>
+							<div className="group mb-4 tracking-wide font-extralight">
+								<span className="group-hover:tracking-widest group-hover:underline group-hover:italic group-hover:cursor-pointer">jobs</span>
+								<span className="text-3xl pl-8 hover:cursor-pointer group-hover:pl-10">⟶</span>
+							</div>
+						</Link>
+					</p>
+				</section>
+			</div>
 		</Layout>
 	)
 }
