@@ -1,5 +1,6 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import ConnectWalletButton from './connectWalletButton'
 import styles from './layout.module.css'
 
 const name = '[Your Name]'
@@ -20,8 +21,9 @@ export default function Layout({ children, home, page }: { children: React.React
 
 				<div className="pt-12"></div>
 				<header className="absolute w-full left-0 top-0 overflow-hidden">
+					<ConnectWalletButton />
 					<Link href="/" passHref>
-						<div className="-mt-1.5 relative p-6 hover:cursor-pointer">
+						<div className="-mt-1.5 relative p-6 hover:cursor-pointer z-999">
 							<p className={`${styles.marquee}`}>
 								<span className="bg-font text-5xl text-purple">WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS // WAGMI TEAMS //&nbsp;</span>
 							</p>
@@ -31,7 +33,7 @@ export default function Layout({ children, home, page }: { children: React.React
 						</div>
 					</Link>
 					{page === 'hackathons' && (
-						<Link href="/jobs">
+						<Link href="/jobs" passHref>
 							<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer">
 								<p>jobs</p>
 							</div>
@@ -49,7 +51,7 @@ export default function Layout({ children, home, page }: { children: React.React
 
 				<main className="px-2 py-4">{children}</main>
 			</div>
-			<footer className="absolute bottom-0 w-full bg-black text-white bv-font text-center">
+			<footer className="fixed bottom-0 w-full bg-black text-white bv-font text-center">
 				<p>
 					made by&nbsp;
 					<a className="hover:underline hover:italic hover:cursor-pointer" href="http://twitter.com/_eloigil" target="_blank" rel="noopener noreferrer">
