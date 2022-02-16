@@ -13,17 +13,33 @@ export default function Jobs({ id }) {
 		const getCurrentPagePositions = async () => {
 			const currentPagePositions = await storeContext.state.contract?.getPaginatedPositions(0, 1, 20)
 			if (currentPagePositions) {
-				setPositions([...positions, ...currentPagePositions, 'a'])
+				setPositions([...positions, ...currentPagePositions])
 			}
 		}
 
 		getCurrentPagePositions()
 	}, [storeContext.state.contract])
 
+	//@TODO this mock call is working, it has to be removed
+	const sendPosition = async () => {
+		const txn = await storeContext.state.contract?.sendPosition(0, {
+			title: 'title1',
+			projectOrCompanyName: 'projectName',
+			projectOrCompanyImageUrl: 'projectOrCompanyImageUrl.jpg',
+			description: 'description1',
+			positionOfferUrl: 'positionOfferUrl.com',
+			contact: '@_eloigil',
+			createdAt: Date.now().toString(),
+		})
+		await txn.wait()
+		console.log(txn.hash)
+	}
+
 	return (
 		<section>
 			<div className={`h-10 transition-[height] ease-in-out duration-200 ${storeContext.state.currentAccount ? 'h-0 overflow-hidden' : ''}`}></div>
 			<h2 className="text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
+			{JSON.stringify(positions[0])}
 		</section>
 	)
 }

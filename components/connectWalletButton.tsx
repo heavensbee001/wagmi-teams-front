@@ -20,7 +20,11 @@ const ConnectWalletButton: FC = () => {
 		if (!storeContext.state.provider) {
 			return
 		}
-		storeContext.dispatch({ type: 'SET_CONTRACT', payload: new ethers.Contract(contractAddress, contractAbi, storeContext.state.provider) })
+		if (storeContext.state.provider.connection.url.includes('polygon')) {
+			storeContext.dispatch({ type: 'SET_CONTRACT', payload: new ethers.Contract(contractAddress, contractAbi, storeContext.state.provider) })
+		} else if (storeContext.state.provider.connection.url === 'metamask') {
+			storeContext.dispatch({ type: 'SET_CONTRACT', payload: new ethers.Contract(contractAddress, contractAbi, new ethers.providers.Web3Provider(window.ethereum).getSigner()) })
+		}
 	}, [storeContext.state.provider])
 
 	const handleClick = () => {
@@ -29,14 +33,14 @@ const ConnectWalletButton: FC = () => {
 			return
 		}
 
-		// set provider to mm
-		storeContext.dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.Web3Provider(window.ethereum) })
 		connectToMetamask()
 	}
 
 	const connectToMetamask = async () => {
 		try {
+			// set provider to mm
 			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
+			storeContext.dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.Web3Provider(window.ethereum) })
 
 			console.log('Connected', accounts[0])
 			storeContext.dispatch({ type: 'SET_CURRENT_ACCOUNT', payload: accounts[0] })
