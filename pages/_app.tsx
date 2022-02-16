@@ -1,12 +1,21 @@
+import React, { Dispatch, useReducer } from 'react'
 import { AppProps } from 'next/app'
-import '/styles/globals.css'
 import Layout from '../components/layout'
+import reducer, { State, Action } from '../redux/reducer'
+
+import '/styles/globals.css'
+
+export const StoreContext = React.createContext({ state: null, dispatch: null })
 
 function App({ Component, pageProps }: AppProps) {
+	const [state, dispatch]: [State, Dispatch<Action>] = useReducer(reducer, reducer())
+
 	return (
-		<Layout>
-			<Component {...pageProps} />
-		</Layout>
+		<StoreContext.Provider value={{ state, dispatch }}>
+			<Layout>
+				<Component {...pageProps} />
+			</Layout>
+		</StoreContext.Provider>
 	)
 }
 

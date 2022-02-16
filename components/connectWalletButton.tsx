@@ -1,27 +1,27 @@
-import { FC, useEffect, useReducer } from 'react'
+import { FC, useEffect, useContext } from 'react'
 import { ethers } from 'ethers'
+import { StoreContext } from '../pages/_app'
+
 import abi from '../utils/WagmiTeams.json'
-import reducer, { State, Action } from '../redux/reducer'
-import { Dispatch } from 'react'
 
 const contractAddress = '0x66d7C953CCE63e14a01c5C849A32460E9D5b7aAe'
 const contractAbi = abi.abi
 
 const ConnectWalletButton: FC = () => {
-	const [state, dispatch]: [State, Dispatch<Action>] = useReducer(reducer, reducer())
+	const storeContext = useContext(StoreContext)
 
 	// set alchemy provider if MM is not connected
 	useEffect(() => {
-		dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.AlchemyProvider('maticmum', process.env.ALCHEMY_KEY) })
+		storeContext.dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.AlchemyProvider('maticmum', process.env.ALCHEMY_KEY) })
 	}, [])
 
 	// set contract when a provider is set
 	useEffect(() => {
-		if (!state.provider) {
+		if (!storeContext.state.provider) {
 			return
 		}
-		dispatch({ type: 'SET_CONTRACT', payload: new ethers.Contract(contractAddress, contractAbi, state.provider) })
-	}, [state.provider])
+		storeContext.dispatch({ type: 'SET_CONTRACT', payload: new ethers.Contract(contractAddress, contractAbi, storeContext.state.provider) })
+	}, [storeContext.state.provider])
 
 	const handleClick = () => {
 		if (!window.ethereum) {
@@ -30,7 +30,7 @@ const ConnectWalletButton: FC = () => {
 		}
 
 		// set provider to mm
-		dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.Web3Provider(window.ethereum) })
+		storeContext.dispatch({ type: 'SET_PROVIDER', payload: new ethers.providers.Web3Provider(window.ethereum) })
 		connectToMetamask()
 	}
 
@@ -39,14 +39,14 @@ const ConnectWalletButton: FC = () => {
 			const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' })
 
 			console.log('Connected', accounts[0])
-			dispatch({ type: 'SET_CURRENT_ACCOUNT', payload: accounts[0] })
+			storeContext.dispatch({ type: 'SET_CURRENT_ACCOUNT', payload: accounts[0] })
 		} catch (error) {
 			console.log(error)
 		}
 	}
 
 	return (
-		<div className={`relative z-10 bg-white w-full text-green flex justify-center cursor-pointer h-10 transition-[height] ease-in-out duration-200 ${state.currentAccount ? 'h-0 overflow-hidden' : ''}`} onClick={handleClick}>
+		<div className={`relative z-10 bg-white w-full text-green flex justify-center cursor-pointer h-10 transition-[height] ease-in-out duration-200 ${storeContext.state.currentAccount ? 'h-0 overflow-hidden' : ''}`} onClick={handleClick}>
 			<span className="pt-2">Connect Metamask wallet! 🦊</span>
 		</div>
 	)
