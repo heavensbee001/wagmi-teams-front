@@ -2,6 +2,7 @@ import { useContext, useState } from 'react'
 import { useRouter } from 'next/router'
 import { StoreContext } from './_app'
 import { useEffect } from 'react'
+import PositionCard from '../components/positionCard'
 
 export default function Jobs({ id }) {
 	const router = useRouter()
@@ -38,8 +39,12 @@ export default function Jobs({ id }) {
 	return (
 		<section>
 			<div className={`h-10 transition-[height] ease-in-out duration-200 ${storeContext.state.currentAccount ? 'h-0 overflow-hidden' : ''}`}></div>
-			<h2 className="text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
-			{JSON.stringify(positions[0])}
+			<h2 className="px-2 text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
+			<ul>
+				{positions.map((position, index) => (
+					<PositionCard position={position} key={index} />
+				))}
+			</ul>
 		</section>
 	)
 }

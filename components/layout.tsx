@@ -49,7 +49,7 @@ export default function Layout({ children, home, page }: { children: React.React
 					)}
 				</header>
 
-				<main className="px-2 py-4">{children}</main>
+				<main className="py-4">{children}</main>
 			</div>
 			<footer className="fixed bottom-0 w-full bg-black text-white bv-font text-center">
 				<p>
