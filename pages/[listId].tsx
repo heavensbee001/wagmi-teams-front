@@ -3,23 +3,37 @@ import { useRouter } from 'next/router'
 import { StoreContext } from './_app'
 import { useEffect } from 'react'
 import PositionCard from '../components/positionCard'
+import CreatePositionForm from '../components/createPositionForm'
 
 export default function Jobs({ id }) {
 	const router = useRouter()
 	const storeContext = useContext(StoreContext)
 
 	const [positions, setPositions] = useState([])
+	const PAGE_SIZE = 50
 
 	useEffect(() => {
+		setPositions([])
+		const positionType = getPositionType(id)
+
 		const getCurrentPagePositions = async () => {
-			const currentPagePositions = await storeContext.state.contract?.getPaginatedPositions(0, 1, 20)
+			const currentPagePositions = await storeContext.state.contract?.getPaginatedPositions(positionType, 1, PAGE_SIZE)
 			if (currentPagePositions) {
-				setPositions([...positions, ...currentPagePositions])
+				setPositions([...currentPagePositions])
 			}
 		}
 
 		getCurrentPagePositions()
-	}, [storeContext.state.contract])
+	}, [storeContext.state.contract, id])
+
+	const getPositionType = _id => {
+		switch (_id) {
+			case 'hackathons':
+				return 0
+			case 'jobs':
+				return 1
+		}
+	}
 
 	//@TODO this mock call is working, it has to be removed
 	const sendPosition = async () => {
@@ -39,12 +53,14 @@ export default function Jobs({ id }) {
 	return (
 		<section>
 			<div className={`h-10 transition-[height] ease-in-out duration-200 ${storeContext.state.currentAccount ? 'h-0 overflow-hidden' : ''}`}></div>
-			<h2 className="px-2 text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
+			<h2 className="mb-4 px-2 text-5xl bv-font text-white italic font-bold tracking-wide">{id}</h2>
 			<ul>
 				{positions.map((position, index) => (
 					<PositionCard position={position} key={index} />
 				))}
 			</ul>
+
+			<CreatePositionForm />
 		</section>
 	)
 }

@@ -1,12 +1,15 @@
 import Head from 'next/head'
 import Link from 'next/link'
+import { useContext } from 'react'
+import { StoreContext } from '../pages/_app'
 import ConnectWalletButton from './connectWalletButton'
 import styles from './layout.module.css'
 
 const name = '[Your Name]'
 export const siteTitle = 'wagmi teams'
 
-export default function Layout({ children, home, page }: { children: React.ReactNode; home?: boolean; page?: string }) {
+export default function Layout({ children, id }: { children: React.ReactNode; id?: string }) {
+	const storeContext = useContext(StoreContext)
 	return (
 		<section className="w-screen bg-orange min-h-screen flex justify-center">
 			<div className="w-full max-w-screen-md">
@@ -32,17 +35,17 @@ export default function Layout({ children, home, page }: { children: React.React
 							</p>
 						</div>
 					</Link>
-					{page === 'hackathons' && (
+					{id === 'hackathons' && (
 						<Link href="/jobs" passHref>
-							<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer">
+							<div className={`fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer z-5 ${storeContext.state.currentAccount ? 'top-0' : 'top-10'} transition-[top] ease-in-out duration-200`}>
 								<p>jobs</p>
 							</div>
 						</Link>
 					)}
 
-					{page === 'jobs' && (
+					{id === 'jobs' && (
 						<Link href="/hackathons" passHref>
-							<div className="fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer">
+							<div className={`fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer z-5 ${storeContext.state.currentAccount ? 'top-0' : 'top-10'} transition-[top] ease-in-out duration-200 `}>
 								<p>hackathons</p>
 							</div>
 						</Link>

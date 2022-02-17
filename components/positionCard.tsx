@@ -13,7 +13,7 @@ const PositionCard: FC<any> = ({ position }) => {
 				<p className="text-sm">{position.description}</p>
 
 				{position.positionOfferUrl ? (
-					<a target="_blank" href={position.positionOfferUrl} rel="noopener noreferrer" className="inline-block w-full text-sm text-green bv-font font-extralight text-right">
+					<a target="_blank" href={position.positionOfferUrl} rel="noopener noreferrer" className="inline-block w-full text-green bv-font font-bold text-right">
 						<span className="group-hover:tracking-widest group-hover:underline group-hover:italic group-hover:cursor-pointer">view offer</span>
 						<span className="pl-4 hover:cursor-pointer">⟶</span>
 					</a>

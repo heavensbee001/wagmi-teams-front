@@ -1,4 +1,4 @@
-import React, { Dispatch, useReducer } from 'react'
+import React, { Dispatch, useEffect, useReducer } from 'react'
 import { AppProps } from 'next/app'
 import Layout from '../components/layout'
 import reducer, { State, Action } from '../redux/reducer'
@@ -12,7 +12,7 @@ function App({ Component, pageProps }: AppProps) {
 
 	return (
 		<StoreContext.Provider value={{ state, dispatch }}>
-			<Layout>
+			<Layout {...pageProps}>
 				<Component {...pageProps} />
 			</Layout>
 		</StoreContext.Provider>
