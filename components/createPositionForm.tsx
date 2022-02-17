@@ -30,6 +30,7 @@ const CreatePositionForm: FC<any> = () => {
 
 	const sendPosition = async () => {
 		try {
+			setLoading(true)
 			const txn = await storeContext.state.contract?.sendPosition(0, {
 				title: formData.positionTitle,
 				projectOrCompanyName: formData.companyName,
@@ -39,7 +40,6 @@ const CreatePositionForm: FC<any> = () => {
 				projectOrCompanyImageUrl: '',
 				createdAt: Date.now().toString(),
 			})
-			setLoading(true)
 			await txn.wait()
 			console.log(txn.hash)
 			setLoading(false)
@@ -58,24 +58,28 @@ const CreatePositionForm: FC<any> = () => {
 				</button>
 				<div className="overflow-y-scroll top-0 left-0 w-full h-full p-4 pb-8">
 					{storeContext.state.currentAccount ? (
-						<form onSubmit={handleSubmit}>
-							<input name="companyName" type="text" placeholder="Company Name*" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
-							<input name="positionTitle" type="text" placeholder="Position Title*" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
-							<textarea name="description" placeholder="Description*" required maxLength={280} onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
-							<input name="positionUrl" type="text" placeholder="Position url" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
-							<input name="contact" type="text" placeholder="contact" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
-							<label htmlFor="tipCreator" className="mr-2">
-								Tip creator
-							</label>
-							<input name="tipCreator" type="number" placeholder="0" onChange={setFormData} className="border-b-2 border-b-black mb-4 py-2 pr-10 placeholder-black text-right appearance-none" onWheel={handleInputWheel} />
-							<img src="/polygon-matic-logo.svg" width={30} alt="MATIC" className="inline-block -ml-8 mb-1" />
-							<span className="ml-2">MATIC</span>
-							<div className="w-full text-right">
-								<button type="submit" className="px-4 py-2 bg-green text-white">
-									Add position
-								</button>
-							</div>
-						</form>
+						!loading ? (
+							<form onSubmit={handleSubmit}>
+								<input name="companyName" type="text" placeholder="Company Name*" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
+								<input name="positionTitle" type="text" placeholder="Position Title*" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
+								<textarea name="description" placeholder="Description*" required maxLength={280} onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
+								<input name="positionUrl" type="text" placeholder="Position url" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
+								<input name="contact" type="text" placeholder="contact" required onChange={setFormData} className="border-b-2 border-b-black w-full mb-4 py-2 placeholder-black" />
+								<label htmlFor="tipCreator" className="mr-2">
+									Tip creator
+								</label>
+								<input name="tipCreator" type="number" placeholder="0" onChange={setFormData} className="border-b-2 border-b-black mb-4 py-2 pr-10 placeholder-black text-right appearance-none" onWheel={handleInputWheel} />
+								<img src="/polygon-matic-logo.svg" width={30} alt="MATIC" className="inline-block -ml-8 mb-1" />
+								<span className="ml-2">MATIC</span>
+								<div className="w-full text-right">
+									<button type="submit" className="px-4 py-2 bg-green text-white">
+										Add position
+									</button>
+								</div>
+							</form>
+						) : (
+							<p className="mt-4 text-center text-xl text-slate-500">Sending transaction...</p>
+						)
 					) : (
 						<ConnectWalletButton />
 					)}
