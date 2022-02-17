@@ -13,6 +13,7 @@ const CreatePositionForm: FC<any> = () => {
 	const storeContext = useContext(StoreContext)
 	const [createFormActive, setCreateFormActive] = useState(false)
 	const [formData, setFormData] = useReducer(formReducer, {})
+	const [loading, setLoading] = useState(false)
 
 	const handleClickAddPosition = () => {
 		setCreateFormActive(!createFormActive)
@@ -23,8 +24,29 @@ const CreatePositionForm: FC<any> = () => {
 	}
 
 	const handleSubmit = e => {
-		console.log(formData)
 		e.preventDefault()
+		sendPosition()
+	}
+
+	const sendPosition = async () => {
+		try {
+			const txn = await storeContext.state.contract?.sendPosition(0, {
+				title: formData.positionTitle,
+				projectOrCompanyName: formData.companyName,
+				description: formData.description,
+				positionOfferUrl: formData.positionUrl,
+				contact: formData.contact,
+				projectOrCompanyImageUrl: '',
+				createdAt: Date.now().toString(),
+			})
+			setLoading(true)
+			await txn.wait()
+			console.log(txn.hash)
+			setLoading(false)
+		} catch (error) {
+			setLoading(false)
+			console.log(error)
+		}
 	}
 
 	return (
