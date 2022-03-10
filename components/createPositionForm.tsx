@@ -51,8 +51,8 @@ const CreatePositionForm: FC<any> = () => {
 
 	return (
 		<Fragment>
-			{createFormActive && <section className="fixed top-0 left-0 w-full h-full bg-black opacity-50" onClick={handleClickAddPosition}></section>}
-			<section className={`fixed bottom-0 w-full max-w-screen-md bg-white h-0 z-10 transition-[height] ease-in-out duration-200 ${createFormActive ? 'h-4/6' : ''}`}>
+			{createFormActive && <section className="fixed top-0 left-0 w-full h-full bg-black opacity-50 z-20" onClick={handleClickAddPosition}></section>}
+			<section className={`fixed bottom-0 w-full max-w-screen-md bg-white h-0 z-30 transition-[height] ease-in-out duration-200 ${createFormActive ? 'h-4/6' : ''}`}>
 				<button className={`absolute -top-16 right-0 w-16 h-16 text-white text-4xl font-black ${createFormActive ? 'bg-black' : 'bg-green'}`} onClick={handleClickAddPosition}>
 					<span className={`block ${createFormActive ? 'rotate-45 translate-x-1' : ''}`}>+</span>
 				</button>
