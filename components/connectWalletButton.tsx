@@ -4,6 +4,12 @@ import { StoreContext } from '../pages/_app'
 
 import abi from '../utils/WagmiTeams.json'
 
+declare global {
+	interface Window {
+		ethereum: any
+	}
+}
+
 const contractAddress = '0x66d7C953CCE63e14a01c5C849A32460E9D5b7aAe'
 const contractAbi = abi.abi
 
