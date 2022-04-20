@@ -39,7 +39,7 @@ const ConnectWalletButton: FC = () => {
 			return
 		}
 
-		//@TODO abstract network validation into a util function
+		//@TODO abstract network validation into a util function!
 		if (process.env.NODE_ENV === 'development' && window.ethereum.chainId === '0x13881') {
 			console.log(window.ethereum.chainId)
 			connectToMetamask()
