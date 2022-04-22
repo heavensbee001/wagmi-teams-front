@@ -1,0 +1,7 @@
+Settings:
+    ID: 087b83bf-2e2b-42f3-92ff-f9a23e7aca59
+
+context:
+    development:
+        environment:
+            NODE_ENV: development
