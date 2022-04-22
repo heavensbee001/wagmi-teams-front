@@ -3,5 +3,6 @@ Settings:
 
 context:
     development:
+        command: echo branch
         environment:
             NODE_ENV: development
