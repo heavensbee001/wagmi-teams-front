@@ -13,7 +13,7 @@ export default function Jobs({ id }) {
 	const PAGE_SIZE = 50
 
 	useEffect(() => {
-		//@TODO abstract network validation into a util function
+		//@TODO abstract network validation into a util function!
 		if (storeContext.state.provider && storeContext.state.provider.connection.url === 'metamask') {
 			if (process.env.NODE_ENV === 'development' && window.ethereum.chainId === '0x13881') {
 				console.log(window.ethereum.chainId)
