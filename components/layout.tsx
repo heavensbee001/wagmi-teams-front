@@ -24,8 +24,6 @@ export default function Layout({ children, id }: { children: React.ReactNode; id
 
 				<div className="pt-12"></div>
 				<header className="fixed w-full left-0 top-0 overflow-hidden z-10 bg-orange">
-					{process.env.NODE_ENV}
-					xx{process.env.VERCEL_ENV}
 					<ConnectWalletButton />
 					<Link href="/" passHref>
 						<div className="-mt-1.5 relative p-6 hover:cursor-pointer z-999">

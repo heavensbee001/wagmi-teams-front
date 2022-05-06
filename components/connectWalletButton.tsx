@@ -40,15 +40,15 @@ const ConnectWalletButton: FC = () => {
 		}
 
 		//@TODO abstract network validation into a util function!
-		if (process.env.NODE_ENV === 'development' && window.ethereum.chainId === '0x13881') {
+		if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'development' && window.ethereum.chainId === '0x13881') {
 			console.log(window.ethereum.chainId)
 			connectToMetamask()
-		} else if (process.env.NODE_ENV === 'production' && window.ethereum.chainId === '137') {
+		} else if (process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' && window.ethereum.chainId === '137') {
 			console.log(window.ethereum.chainId)
 			connectToMetamask()
 		} else {
 			console.log('wrong network', window.ethereum.chainId)
-			alert(`Please connect to: ${process.env.NODE_ENV === 'production' ? 'Matic Network' : 'Matic mumbai testnet'}`)
+			alert(`Please connect to: ${process.env.NEXT_PUBLIC_VERCEL_ENV === 'production' ? 'Matic Network' : 'Matic mumbai testnet'}`)
 			return
 		}
 	}
