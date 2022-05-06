@@ -24,6 +24,8 @@ export default function Layout({ children, id }: { children: React.ReactNode; id
 
 				<div className="pt-12"></div>
 				<header className="fixed w-full left-0 top-0 overflow-hidden z-10 bg-orange">
+					{process.env.NODE_ENV}
+					xx{process.env.VERCEL_ENV}
 					<ConnectWalletButton />
 					<Link href="/" passHref>
 						<div className="-mt-1.5 relative p-6 hover:cursor-pointer z-999">
@@ -42,7 +44,6 @@ export default function Layout({ children, id }: { children: React.ReactNode; id
 							</div>
 						</Link>
 					)}
-
 					{id === 'jobs' && (
 						<Link href="/hackathons" passHref>
 							<div className={`fixed top-0 right-2 text-white bg-black px-6 pt-2 pb-4 -translate-x-9 origin-top-right -rotate-90 hover:cursor-pointer z-5 ${storeContext.state.currentAccount ? 'top-0' : 'top-10'} transition-[top] ease-in-out duration-200 `}>
